@@ -1,5 +1,6 @@
-const AddTodo = require("./model");
-const User = require("../user/model");
+const ActiveTodo = require("./model");
+
+
 
 
 
@@ -9,7 +10,7 @@ const addActiveTodo = async (req, res) => {
             const error = new Error("User not authorised");
             res.status(401).json({ errorMessage: error.message, error: error });
         }
-        const newTodo = await AddTodo.create(req.body.todo);
+        const newTodo = await ActiveTodo.create(req.body);
         res.status(201).json({ message: "success", newTodo: newTodo });
     }
     catch (error) {
@@ -18,16 +19,21 @@ const addActiveTodo = async (req, res) => {
 }
 
 
+
+
+
+
+
 const deleteActiveTodo = async (req, res) => {
     try {
         if (!req.authCheck) {
             const error = new Error("User is not authorised");
             res.status(401).json({ errorMessage: error.message, error: error });
         }
-        const deleteTodo = await AddTodo.destroy({ where: { id: req.body.todo } });
+        const deleteTodo = await ActiveTodo.destroy({ where: { id: req.body.todo } });
 
-        if (deletedTodo >= 1) {
-            res.status(204).json({ message: "success", deletedTodo: deleteTodo });
+        if (deleteTodo >= 1) {
+            res.status(204).json({ message: "success", deleteTodo: deleteTodo });
             return
         } 
         else {

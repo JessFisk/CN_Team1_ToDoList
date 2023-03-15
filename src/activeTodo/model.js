@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const connection = require("../db/connection");
 
-const AddTodo = connection.define("AddTodo", {
+const ActiveTodo = connection.define("ActiveTodo", {
   todo: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -11,5 +11,7 @@ const AddTodo = connection.define("AddTodo", {
 
 
 //Below is an option, as we have needed this for bug fixes in the past
+
 // { indexes: [{ unique: true, fields: ["todo"] }] }
-module.exports = AddTodo;
+
+module.exports = ActiveTodo;
