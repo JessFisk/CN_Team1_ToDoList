@@ -2,18 +2,18 @@ require ("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const port = process.env.PORT || 5001
-const userRouter = require("./db/connection");
 
+const userRouter = require("./users/routes");
 const User = require ("./users/model");
 
 const app = express();
 
-app.use(express());
-app.use(cors());
+app.use(express.json());
+// app.use(cors());
 
-const syncTables = () => {
-    User.sync({alter:true, force:false})
-}
+// const syncTables = () => {
+//     User.sync({alter:true, force:false})
+// }
 
 app.use(userRouter);
 
@@ -22,7 +22,7 @@ app.get("/health", (req, res) => {
 })
 
 app.listen(port, () => {
-    syncTables();
+    // syncTables();
     console.log(`app is listening on port ${port}`)
 });
 
