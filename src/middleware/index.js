@@ -1,5 +1,7 @@
 
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
+const User = require("../users/model")
 const saltRounds = process.env.SALT_ROUNDS;
 
 
@@ -10,12 +12,15 @@ const saltRounds = process.env.SALT_ROUNDS;
 const hashPass = async (req, res, next) => {
     try {
         req.body.password = await bcrypt.hash(req.body.password, parseInt(saltRounds));
-        next();
         
-        if (!user) {
-            const error = new Error("Not authorised");
-            res.status(401).json({ errorMessage: error.message, error: error });
-        }}
+        // theres no user instance in this method..
+
+        // if (!user) {
+        //     const error = new Error("Not authorised");
+        //     res.status(401).json({ errorMessage: error.message, error: error });
+        // }
+        next();
+    }
         catch (error) {
             res.status(501).json({ errorMessage: "failure" , error: error });
         };
