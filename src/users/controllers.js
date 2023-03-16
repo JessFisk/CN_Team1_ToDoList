@@ -7,33 +7,40 @@ const registerUser = async (req, res) => {
 
         const user = await User.create(req.body);
 
-        res.status(201).json({ message: "success", 
+        res.status(201).json({
+            message: "success",
             user: {
                 username: req.body.username,
                 password: req.body.password,
             }
-    });
-    
-    // test
-    console.log(user)
-        
+        });
+
+        // test
+        console.log(user)
+
     } catch (error) {
-        res.status(501).json({ errorMsg: error.message, error: error })
+        res.status(501).json({ message: error.message, error: error })
     }
 };
 
 
 const login = async (req, res) => {
     try {
-
-        res.status(201).json({ message: "success", 
+        //AuthCheck????
+        if (!req.authCheck) {
+            const error = new Error("User not authorised");
+            res.status(401).json({ message: error.message, error: error });
+        }
+        res.status(201).json({
+            message: "success",
             user: {
                 username: req.body.username,
                 password: req.body.password,
-            }})
-        
+            }
+        })
+
     } catch (error) {
-        res.status(501).json({ errorMsg: error.message, error: error })
+        res.status(501).json({ message: error.message, error: error })
     }
 }
 
@@ -41,5 +48,4 @@ const login = async (req, res) => {
 module.exports = {
     registerUser,
     login,
-
 }
