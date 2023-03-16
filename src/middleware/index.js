@@ -15,7 +15,7 @@ const hashPass = async (req, res, next) => {
         next();
     }
         catch (error) {
-            res.status(501).json({ errorMessage: "failure" , error: error });
+            res.status(501).json({ message: "failure" , error: error });
         };
     };
     
@@ -28,11 +28,11 @@ const hashPass = async (req, res, next) => {
             const match = await bcrypt.compare(req.body.password, req.user.password);
             if (!match) {
                 const error = new Error("password do not match")
-                res.status(500).json({ errorMessage: error.message, error: error });
+                res.status(500).json({ message: error.message, error: error });
             }   
             next();     
         } catch (error) {
-            res.status(501).json({ errorMessage: error.message, error: error });
+            res.status(501).json({ message: error.message, error: error });
         }};
     
 
@@ -50,14 +50,14 @@ const hashPass = async (req, res, next) => {
   
       if (!user) {
         const error = new Error("User not authorised");
-        res.status(401).json({ errorMessage: error.message, error: error });
+        res.status(401).json({ message: error.message, error: error });
       }
   
       req.authCheck = user;
       next();
     }
     catch (error) {
-      res.status(501).json({ errorMessage: "failure" , error: error });
+      res.status(501).json({ message: "failure" , error: error });
     }
   }
   
