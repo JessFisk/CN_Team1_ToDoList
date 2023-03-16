@@ -5,11 +5,13 @@ const port = process.env.PORT || 5001
 
 const userRouter = require("./users/routes");
 const activeTodoRouter = require("./activeTodo/routes");
+
 const doneTodoRouter = require("./DoneTodo/routes");
 
 const User = require ("./users/model");
 const ActiveTodo = require ("./activeTodo/model");
 const DoneTodo = require ("./DoneTodo/model");
+
 
 const app = express();
 
@@ -26,12 +28,13 @@ app.use(userRouter);
 app.use(activeTodoRouter)
 app.use(doneTodoRouter)
 
+
 app.get("/health", (req, res) => {
     res.status(200).json({message: "API is working. Yay"})
 })
 
 app.listen(port, () => {
-    // syncTables();
+    syncTables();
     console.log(`app is listening on port ${port}`)
 });
 

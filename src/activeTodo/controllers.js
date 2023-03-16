@@ -14,7 +14,7 @@ const addActiveTodo = async (req, res) => {
         res.status(201).json({ message: "success", newTodo: newTodo });
     }
     catch (error) {
-        res.status(501).json({ message: error.message, error: error });
+            res.status(501).json({ message: error.message, error: error });
     }
 }
 
@@ -43,6 +43,7 @@ const deleteActiveTodo = async (req, res) => {
 
     catch (error) {
         res.status(501).json({ message: error.message, error: error });
+
     }
 }
 
@@ -57,3 +58,4 @@ module.exports = {
     addActiveTodo,
     deleteActiveTodo,
 };
+

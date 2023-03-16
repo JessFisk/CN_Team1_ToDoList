@@ -12,13 +12,6 @@ const saltRounds = process.env.SALT_ROUNDS;
 const hashPass = async (req, res, next) => {
     try {
         req.body.password = await bcrypt.hash(req.body.password, parseInt(saltRounds));
-        
-        // theres no user instance in this method..
-
-        // if (!user) {
-        //     const error = new Error("Not authorised");
-        //     res.status(401).json({ errorMessage: error.message, error: error });
-        // }
         next();
     }
         catch (error) {
